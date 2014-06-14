@@ -1,6 +1,8 @@
-# Dockerfile-build/registry-swift
+# docker-registry-swift
 
 Source for automated builds of a docker registry image.
+
+The built image is available at https://registry.hub.docker.com/u/pallet/registry-swift/
 
 The image is based on the official registry image, but with added
 support for storing images on Swift.
@@ -18,7 +20,7 @@ Run a docker registry backed by a Swift datastore (e.g. on Rackspace):
   -e OS_TENANT_NAME=MossoCloudFS_nnnnn \
   -p 5000:5000 \
   --name registry \
-  registry-swift
+  pallet/registry-swift
 ```
 
 ## License
