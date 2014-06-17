@@ -14,7 +14,7 @@
 #   --name registry \
 #   registry-swift
 
-FROM registry:0.7.2
+FROM registry:0.7.1
 MAINTAINER Hugo Duncan <hugo@palletops.com>
 
 # Add the swift support
