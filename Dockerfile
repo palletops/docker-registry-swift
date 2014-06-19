@@ -15,8 +15,13 @@
 FROM registry
 MAINTAINER Paul Czarkowski <username.taken@gmail.com>
 
-RUN git clone https://github.com/dmp42/docker-registry-driver-glance.git /tmp/glance-driver &&
-    pip install /tmp/glance-driver
+RUN apt-get -yqq update
+RUN apt-get -yqq install git libffi-dev libssl-dev
 
-# Add the glance support
-RUN ["pip", "install", "docker-registry-driver-glance", "python-keystoneclient"]
+RUN git clone https://github.com/dmp42/docker-registry-driver-glance.git /tmp/glance-driver \
+    && pip install /tmp/glance-driver
+
+# Add the openstack support
+RUN ["pip", "install", "python-keystoneclient", "docker-registry-driver-swift"]
+
+ADD config/config_sample.yml /docker-registry/config/config_sample.yml
