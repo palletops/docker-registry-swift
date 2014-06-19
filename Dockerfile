@@ -15,5 +15,8 @@
 FROM registry
 MAINTAINER Paul Czarkowski <username.taken@gmail.com>
 
+RUN git clone https://github.com/dmp42/docker-registry-driver-glance.git /tmp/glance-driver &&
+    pip install /tmp/glance-driver
+
 # Add the glance support
 RUN ["pip", "install", "docker-registry-driver-glance", "python-keystoneclient"]
