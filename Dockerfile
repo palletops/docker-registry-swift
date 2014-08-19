@@ -3,19 +3,25 @@
 # Run a docker registry backed by a Swift datastore.
 #
 # /usr/bin/docker run --rm \
-#   -e SETTINGS_FLAVOR=swift \
+#   -e SETTINGS_FLAVOR=glance \
 #   -e OS_CONTAINER=docker-registry \
 #   -e OS_USERNAME=your-username \
 #   -e OS_PASSWORD=your-password \
-#   -e OS_AUTH_URL=https://identity.api.rackspacecloud.com/v2.0/ \
-#   -e OS_REGION_NAME=DFW \
-#   -e OS_TENANT_NAME=MossoCloudFS_nnnnn \
+#   -e OS_AUTH_URL=???? \
 #   -p 5000:5000 \
 #   --name registry \
-#   registry-swift
+#   registry-glance
 
 FROM registry
-MAINTAINER Hugo Duncan <hugo@palletops.com>
+MAINTAINER Paul Czarkowski <username.taken@gmail.com>
 
-# Add the swift support
-RUN ["pip", "install", "docker-registry-driver-swift", "python-keystoneclient"]
+RUN apt-get -yqq update
+RUN apt-get -yqq install git libffi-dev libssl-dev
+
+RUN git clone https://github.com/dmp42/docker-registry-driver-glance.git /tmp/glance-driver \
+    && pip install /tmp/glance-driver
+
+# Add the openstack support
+RUN ["pip", "install", "python-keystoneclient", "docker-registry-driver-swift"]
+
+ADD config/config_sample.yml /docker-registry/config/config_sample.yml
