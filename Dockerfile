@@ -18,4 +18,4 @@ FROM registry
 MAINTAINER Hugo Duncan <hugo@palletops.com>
 
 # Add the swift support
-RUN ["pip", "install", "docker-registry-driver-swift", "python-keystoneclient"]
+RUN ["pip", "install", "docker-registry-driver-swift"]
